@@ -2,9 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { Bell, ChevronRight, Menu, PanelLeftClose, PanelLeftOpen, Search } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import type { SafeUser } from "@/lib/auth/session";
+import { AccountMenu } from "./dashboard-menus";
 
 const routeTitles: Record<string, string> = {
   "/dashboard": "Overview",
@@ -19,12 +20,14 @@ const routeTitles: Record<string, string> = {
 };
 
 type DashboardHeaderProps = {
+  user: SafeUser;
   collapsed: boolean;
   onToggleSidebar: () => void;
   onOpenMobileNav: () => void;
 };
 
 export function DashboardHeader({
+  user,
   collapsed,
   onToggleSidebar,
   onOpenMobileNav,
@@ -75,9 +78,7 @@ export function DashboardHeader({
           <Bell />
           <span className="absolute right-2 top-2 size-1.5 rounded-full bg-violet-600 ring-2 ring-white" />
         </Button>
-        <Avatar className="size-8 sm:hidden">
-          <AvatarFallback className="bg-amber-100 text-[10px] font-semibold text-amber-800">JD</AvatarFallback>
-        </Avatar>
+        <div className="sm:hidden"><AccountMenu user={user} collapsed dropUp={false} /></div>
       </div>
     </header>
   );

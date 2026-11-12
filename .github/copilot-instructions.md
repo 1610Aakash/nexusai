@@ -13,4 +13,7 @@
 - Prefer reusable UI, Tailwind CSS, shadcn/ui, and Lucide React icons.
 - Avoid unnecessary dependencies and keep code clean, readable, and maintainable.
 - Never expose secrets or server-only configuration to the browser.
-- Enforce organization-level data isolation in future features and verify permissions on the backend.
+- Enforce organization-level data isolation for every organization-owned resource and verify permissions on the backend.
+- Resolve organization roles from active memberships, never from global user claims or client-provided organization IDs.
+- Use HttpOnly same-site cookies for sessions; never store session tokens in browser storage.
+- Hash passwords and one-time tokens before storing them. Check token expiry and single-use status in application code in addition to TTL indexes.
